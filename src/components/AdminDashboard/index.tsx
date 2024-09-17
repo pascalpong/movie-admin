@@ -6,7 +6,7 @@ import { Menu as MenuIcon, Dashboard as DashboardIcon, People as PeopleIcon, Set
 
 const drawerWidth = 240;
 
-export default function AdminDashboard() {
+const AdminDashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -89,3 +89,5 @@ export default function AdminDashboard() {
     </Box>
   );
 }
+
+export default AdminDashboard;

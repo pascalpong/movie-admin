@@ -2,6 +2,8 @@
 
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Box } from '@mui/material';
 import { Dashboard as DashboardIcon, People as PeopleIcon, Settings as SettingsIcon } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
+
 
 interface AdminSidebarProps {
   mobileOpen: boolean;
@@ -9,17 +11,35 @@ interface AdminSidebarProps {
   drawerWidth: number;
 }
 
-export default function AdminSidebar({ mobileOpen, handleDrawerToggle, drawerWidth }: AdminSidebarProps) {
+const AdminSidebar = ({ mobileOpen, handleDrawerToggle, drawerWidth }: AdminSidebarProps) => {
+  const router = useRouter();
+  const sideMenu = [
+    {
+      title: 'Dashboard',
+      path: '/'
+    }, {
+      title: 'Movies',
+      path: '/movies'
+    }
+  ];
+
+  const reDirect = (path: string) => {
+    router.push(path)
+  }
+
   const drawer = (
     <div>
       <Toolbar />
       <List>
-        {['Dashboard', 'Users', 'Settings'].map((text, index) => (
-          <ListItem button key={text}>
+        {sideMenu.map((menu, index) => (
+          <ListItem key={index}
+            sx={{ cursor: 'pointer' }}
+            onClick={() => reDirect(menu.path)}
+          >
             <ListItemIcon>
               {index === 0 ? <DashboardIcon /> : index === 1 ? <PeopleIcon /> : <SettingsIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={menu.title} />
           </ListItem>
         ))}
       </List>
@@ -37,7 +57,7 @@ export default function AdminSidebar({ mobileOpen, handleDrawerToggle, drawerWid
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: 'block', sm: 'none' },
@@ -59,3 +79,5 @@ export default function AdminSidebar({ mobileOpen, handleDrawerToggle, drawerWid
     </Box>
   );
 }
+
+export default AdminSidebar;

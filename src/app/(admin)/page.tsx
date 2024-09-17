@@ -12,8 +12,10 @@ export default function AdminPage() {
   }
 
   return (
-    <Typography variant="h4">
-      Welcome to the Admin Dashboard
-    </Typography>
+    <div>
+      <Typography variant="h4" gutterBottom>
+        Welcome to the Admin Dashboard
+      </Typography>
+    </div>
   );
 }
